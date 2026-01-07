@@ -309,3 +309,8 @@ Enable debug mode for detailed troubleshooting:
 ```bash
 sudo ./bootstrap.sh --config config.yaml --debug --log-level DEBUG
 ```
+
+## TODO
+- ARCH detection
+- A deterministic unique ID generator (Snowflake‑style or simpler)
+- A first‑boot ISO‑based data source
