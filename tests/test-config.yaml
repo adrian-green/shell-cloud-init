@@ -1,0 +1,19 @@
+packages:
+  - curl
+  - vim
+users:
+  - name: testuser
+ssh_authorized_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7... test@example.com
+write_files:
+  - path: /tmp/test-file.txt
+    content: This is a test file
+    permissions: "0644"
+hostname: multi-test
+timezone: America/New_York
+locale: en_US.UTF-8
+bootcmd:
+  - echo "Boot command executed"
+runcmd:
+  - echo "Run command executed"
+final_message: Bootstrap test completed successfully

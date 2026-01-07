@@ -1,0 +1,48 @@
+#cloud-config
+
+hostname: example-vm
+timezone: Australia/Brisbane
+locale: en_AU.UTF-8
+
+users:
+  - name: adrian
+    groups: sudo
+    shell: /bin/bash
+
+ssh_authorized_keys:
+  - ssh-ed25519 AAAA...replace_with_real_key
+
+packages:
+  - htop
+  - curl
+  - git
+  - tmux
+  - jq
+  - net-tools
+
+write_files:
+  - path: /etc/profile.d/custom.sh
+    permissions: "0755"
+    content: |
+      export EDITOR=vim
+      alias ll='ls -alF'
+      alias la='ls -A'
+      alias l='ls -CF'
+
+  - path: /home/adrian/.bash_aliases
+    owner: adrian:adrian
+    permissions: "0644"
+    content: |
+      alias grep='grep --color=auto'
+      alias d='docker'
+      alias k='kubectl'
+
+bootcmd:
+  - echo "Bootcmd executed before package installation"
+
+runcmd:
+  - echo "Running post-configuration commands"
+  - systemctl restart ssh 2>/dev/null || service ssh restart 2>/dev/null || true
+  - echo "Bootstrap complete at $(date)" >> /var/log/bootstrap-custom.log
+
+final_message: "Bootstrap process finished successfully"

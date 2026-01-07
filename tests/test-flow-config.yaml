@@ -1,0 +1,18 @@
+{
+  "packages": ["curl", "vim", "git"],
+  "users": [{"name": "testuser", "groups": ["sudo"], "shell": "/bin/bash"}],
+  "ssh_authorized_keys": ["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7... test@example.com"],
+  "write_files": [
+    {
+      "path": "/tmp/test-flow-file.txt",
+      "content": "This is a test file from YAML Flow style",
+      "permissions": "0644"
+    }
+  ],
+  "hostname": "flow-test-server",
+  "timezone": "America/New_York",
+  "locale": "en_US.UTF-8",
+  "bootcmd": ["echo 'Boot command from flow style'"],
+  "runcmd": ["echo 'Run command from flow style'"],
+  "final_message": "YAML Flow style bootstrap test completed successfully"
+}

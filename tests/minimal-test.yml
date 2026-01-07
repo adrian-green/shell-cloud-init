@@ -1,0 +1,12 @@
+#cloud-config
+
+hostname: minimal-test
+timezone: UTC
+locale: en_US.UTF-8
+
+packages: []
+
+write_files: []
+
+runcmd:
+  - echo "Minimal bootstrap executed"

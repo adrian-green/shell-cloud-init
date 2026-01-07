@@ -1,0 +1,28 @@
+#cloud-config
+
+hostname: edge-test
+
+# timezone intentionally omitted
+# locale intentionally omitted
+
+users:
+  - name: edgeuser
+    shell: /bin/bash
+
+ssh_authorized_keys: []
+
+packages:
+  - curl
+
+write_files:
+  - path: /tmp/testfile.txt
+    permissions: "0600"
+    content: |
+      This is an edge-case test file.
+
+bootcmd: []
+
+runcmd:
+  - echo "Edge case runcmd executed"
+
+final_message: "Edge case bootstrap finished"

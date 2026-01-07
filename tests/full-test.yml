@@ -1,0 +1,45 @@
+hostname: newhost
+timezone: UTC
+locale: en_AU.UTF-8
+users:
+  - name: adrian
+    groups: sudo
+    shell: /bin/bash
+  - name: testuser
+    groups: users
+    shell: /bin/sh
+ssh_authorized_keys:
+  - ssh-ed25519 AAAA...replace_with_real_key
+  - ssh-ed25519 AAAA...another_key
+packages:
+  - htop
+  - curl
+  - git
+  - tmux
+  - jq
+  - net-tools
+  - unzip
+write_files:
+  - path: /etc/profile.d/env.sh
+    permissions: "0755"
+    content: |
+      export EDITOR=vim
+      export HISTSIZE=10000
+  - path: /home/adrian/.bash_aliases
+    owner: adrian:adrian
+    permissions: "0644"
+    content: |
+      alias ll='ls -alF'
+      alias gs='git status'
+  - path: /home/testuser/.bash_aliases
+    owner: testuser:testuser
+    permissions: "0644"
+    content: |
+      alias l='ls -CF'
+bootcmd:
+  - echo "Bootcmd running before package installation"
+runcmd:
+  - echo "Running post-install commands"
+  - date >> /var/log/bootstrap-full.log
+  - echo "Done"
+final_message: Full feature bootstrap completed
